@@ -148,9 +148,19 @@ const pages = [
 
 // Tabela
 const tbody = document.getElementById('tabela');
+let lastDate = null;
 pages.forEach(p => {
   const tagClass = p.tipo === 'repo' ? 'tag repo' : 'tag';
   const tagLabel = p.tipo === 'repo' ? 'Repo independente' : 'Captare Pages';
+  if (p.data !== lastDate) {
+    lastDate = p.data;
+    const [d, m, y] = p.data.split('/');
+    const meses = ['','jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+    const label = `${parseInt(d)} de ${meses[parseInt(m)]} de ${y}`;
+    tbody.innerHTML += `<tr>
+      <td colspan="5" style="background:#0f172a;padding:10px 12px 4px;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#475569;border-bottom:1px solid #1e293b">${label}</td>
+    </tr>`;
+  }
   tbody.innerHTML += `<tr>
     <td style="color:#475569">${p.n}</td>
     <td><strong style="color:#f1f5f9">${p.nome}</strong></td>
