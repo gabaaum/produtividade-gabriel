@@ -31,7 +31,6 @@
   .tl-value.red   { color: #f87171; }
 
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
-  @media(max-width:600px){ .cards { grid-template-columns: 1fr; } }
   .card { background: #1e293b; border: 1px solid #334155; border-radius: 14px; padding: 22px; text-align: center; }
   .card-icon { font-size: 1.6rem; margin-bottom: 10px; }
   .card-value { font-size: 2rem; font-weight: 900; line-height: 1; margin-bottom: 6px; }
@@ -43,28 +42,49 @@
   .chart-box { background: #1e293b; border: 1px solid #334155; border-radius: 14px; padding: 28px; margin-bottom: 24px; }
   .chart-box h2 { font-size: .78rem; font-weight: 700; color: #64748b; margin-bottom: 20px; text-transform: uppercase; letter-spacing: .1em; }
 
-  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; min-width: 480px; }
   th { text-align: left; padding: 10px 12px; color: #64748b; font-weight: 700; font-size: .7rem; text-transform: uppercase; letter-spacing: .06em; border-bottom: 1px solid #334155; }
   td { padding: 10px 12px; border-bottom: 1px solid #1a2535; color: #cbd5e1; }
   tr:last-child td { border-bottom: none; }
   .tag { display: inline-block; padding: 2px 10px; border-radius: 100px; font-size: .68rem; font-weight: 700; background:#1e3a5f; color:#60a5fa; }
   .tag.repo { background:#14532d; color:#4ade80; }
   .footer { text-align: center; color: #334155; font-size: .75rem; margin-top: 40px; }
+
   .fonte-box { background: #1e293b; border: 1px solid #334155; border-radius: 14px; padding: 28px; margin-bottom: 24px; }
   .fonte-box h2 { font-size: .78rem; font-weight: 700; color: #64748b; margin-bottom: 20px; text-transform: uppercase; letter-spacing: .1em; }
   .fonte-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid #334155; }
   .fonte-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
   .fonte-num { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 6px 10px; font-size: .7rem; font-weight: 800; color: #64748b; flex-shrink: 0; }
-  .fonte-body { flex: 1; }
+  .fonte-body { flex: 1; min-width: 0; }
   .fonte-title { font-size: .82rem; font-weight: 700; color: #f1f5f9; margin-bottom: 4px; }
   .fonte-desc { font-size: .76rem; color: #64748b; line-height: 1.6; margin-bottom: 8px; }
   .fonte-link { display: inline-block; font-size: .72rem; color: #60a5fa; text-decoration: none; border-bottom: 1px solid #334155; word-break: break-all; }
   .fonte-link:hover { color: #93c5fd; }
   .metodologia-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 16px; }
-  @media(max-width:600px){ .metodologia-grid { grid-template-columns: 1fr; } }
   .met-card { background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 14px 16px; }
   .met-label { font-size: .65rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #475569; margin-bottom: 6px; }
   .met-value { font-size: .8rem; color: #cbd5e1; line-height: 1.5; }
+
+  @media (max-width: 600px) {
+    body { padding: 24px 16px; }
+    .header { margin-bottom: 32px; }
+    .header h1 { font-size: 1.25rem; }
+    .hero { padding: 28px 20px; }
+    .hero-text { font-size: 1.1rem; }
+    .tl-label { width: 58px; font-size: .72rem; }
+    .tl-value { width: 70px; font-size: .78rem; }
+    .cards { grid-template-columns: 1fr 1fr; }
+    .card { padding: 16px; }
+    .card-value { font-size: 1.6rem; }
+    .chart-box { padding: 18px 14px; }
+    .fonte-box { padding: 18px 14px; }
+    .metodologia-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 380px) {
+    .cards { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -123,11 +143,12 @@
   <div class="chart-box">
     <h2>Lista completa de entregas (ordenada por commit)</h2>
     <table>
+    <div class="table-wrap"><table>
       <thead>
         <tr><th>#</th><th>Página / Projeto</th><th>Data do commit</th><th>Origem</th><th>Link</th></tr>
       </thead>
       <tbody id="tabela"></tbody>
-    </table>
+    </table></div>
   </div>
 
   <div class="fonte-box">
